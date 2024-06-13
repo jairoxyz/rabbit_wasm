@@ -579,25 +579,31 @@ const main = async (xrax: string) => {
   fake_window.xrax = xrax;
   let keys = await V();
   let getSourcesUrl = "https://megacloud.tv/embed-1/ajax/e-1/getSources?id=" + xrax + "&v=" + fake_window.localStorage.kversion + "&h=" + fake_window.localStorage.kid + "&b=1676800512"
-  
-  let resp_json = await (await fetch(getSourcesUrl, {
-    "headers": {
-      "User-Agent": user_agent,
-      "Referer": "https://megacloud.tv/embed-1/e-1/"
-    },
-    "method": "GET",
-    "mode": "cors"
-  })).json();
+  console.log('\ngetSources Url:', getSourcesUrl);
 
-  // (async () => {
-  //   const response = await fetch('https://api.example.com/data');
-  //   const data = await response.json();
-  //   const statusCode = response.status;
+  // let resp_json = await (await fetch(getSourcesUrl, {
+  //   "headers": {
+  //     "User-Agent": user_agent,
+  //     "Referer": "https://megacloud.tv/embed-1/e-1/"
+  //   },
+  //   "method": "GET",
+  //   "mode": "cors"
+  // })).json();
+
+
+  const resp = await fetch(getSourcesUrl, {
+      "headers": {
+            "User-Agent": user_agent,
+            "X-Requested-With": "XMLHttpRequest"
+          },
+          "method": "GET",
+          "mode": "cors"
+  });
   
-  //   console.log('Status Code:', statusCode);
-  //   console.log('Data:', data);
-  // })();
-  
+  console.log('\nStatus Code:', resp.status);
+
+  let resp_json = await resp.json();
+    
   console.log("\nResponse from getSources:");
   console.log(resp_json);
   let encrypted = resp_json.sources;
@@ -621,4 +627,4 @@ const main = async (xrax: string) => {
 }
 
 
-main('UOgCcbjetAbG'); //change this value to the embed-id you want to extract from
+main('O2v5N07NIqcm'); //change this value to the embed-id you want to extract from

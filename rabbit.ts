@@ -583,6 +583,7 @@ const main = async (xrax: string) => {
   let resp_json = await (await fetch(getSourcesUrl, {
     "headers": {
       "User-Agent": user_agent,
+      "X-Requested-With": "XMLHttpRequest"
     },
     "method": "GET",
     "mode": "cors"
@@ -610,7 +611,7 @@ const main = async (xrax: string) => {
 }
 
 
-main('Mq8xpS3VL9Dz'); //change this value to the embed-id you want to extract from
+main('QqQWTmJp5Sz5'); //change this value to the embed-id you want to extract from
 
 
 
